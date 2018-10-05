@@ -1,0 +1,10 @@
+{
+  "name": "handsontable-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "utsushiiro <ozeki.haru@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "handsontable": "^5.0.1"
+  }
+}
