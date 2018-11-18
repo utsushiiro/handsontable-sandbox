@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,18 +12,23 @@
     <div id='example'></div>
     <script>
         var data = [
-        ["", "Ford", "Tesla", "Toyota", "Honda"],
-        ["2017", 10, 11, 12, 13],
-        ["2018", 20, 11, 14, 13],
-        ["2019", 30, 15, 12, 13]
+            ["", "Ford", "Tesla", "Toyota", "Honda"],
+            ["2017", 10, 11, 12, 13],
+            ["2018", 20, 11, 14, 13],
+            ["2019", 30, 15, 12, 13]
         ];
-
         var container = document.getElementById('example');
-        var hot = new Handsontable(container, {
-        data: data,
-        rowHeaders: true,
-        colHeaders: true
-        });        
+        var config = {
+            data: data,
+            rowHeaders: true,
+            colHeaders: true,
+            selectionMode: 'multiple',
+            manualColumnMove: true
+        };
+        config['afterSelection'] = function() {
+            // console.log(arguments);
+        };
+        var hot = new Handsontable(container, config);
     </script>
 </body>
 </html>
