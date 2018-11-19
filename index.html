@@ -31,7 +31,25 @@
         };
         config['afterColumnMove'] = function() {
             setTimeout(()=>{
+                // 1 反映される(dataをまるごと変えている)
                 hot.updateSettings({data: [['a','b','c','d','e']]})
+
+                // 2 反映される(dataをまるごと変えている)
+                hot.loadData([['a','b','c','d','e']]);
+
+                // 3 反映されない(dataごと変えてしまっているのでdata bindingは働かない)
+                config.data = [['a','b','c','d','e']];
+                hot.render();
+
+                // 4 反映される(dataの一部を変えている, つまりdataが指すobjectは変わっていないのでdata bindingは有効)
+                config.data[0] = ['a','b','c','d','e']
+                hot.render();
+
+                // 1,2,4 において, 新たに挿入されるデータはcolの移動の影響を受けている
+                // 例えば 2, 3行目が入れ替える操作をしたあとに新たにデータを入れる(loadData)場合, 
+                // 表示されるデータ(getDataで取得される値)の2,3行目は入れ替わっている
+                // なお, getSourceDataの値は入れ替わっていない
+                // つまり, loadDataによってmove col, rowによるSourceデータと表示データの関係はリセットされずに保持されると考えられる
             }, 1000);
         };
         var hot = new Handsontable(container, config);
